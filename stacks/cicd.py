@@ -36,3 +36,8 @@ class CICDStack(core.Stack):
         cb_project.role.add_managed_policy(
             iam.ManagedPolicy.from_aws_managed_policy_name('AmazonEC2ContainerRegistryPowerUser')
         )
+        self._cb_project = cb_project
+
+    @property
+    def cb_project(self):
+        return self._cb_project

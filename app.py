@@ -11,16 +11,14 @@ account_id = os.environ.get('CDK_DEFAULT_ACCOUNT')
 aws_region = os.environ.get('CDK_DEFAULT_REGION')
 aws_env = {'account': account_id, 'region': aws_region}
 
-codebuild_project_name = 'debug_codebuild_project'
 
 cicd_dev_props = {
     'namespace': 'debug-cicd',
-    'codebuild_project_name': codebuild_project_name
+    'codebuild_project_name': 'debug_codebuild_project'
 }
 
 slack_dev_props = {
     'namespace': 'debug-codebuild-slack',
-    'codebuild_project_name': codebuild_project_name,
     'aws_account': aws_env['account']
 }
 
@@ -32,6 +30,8 @@ cicd = CICDStack(
     cicd_dev_props,
     env=aws_env
 )
+cb_project = cicd.cb_project
+slack_dev_props['cb_project'] = cb_project
 CodeBuildLambdaStack(
     app,
     slack_dev_props['namespace'],

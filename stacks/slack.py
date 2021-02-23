@@ -12,11 +12,7 @@ class CodeBuildLambdaStack(core.Stack):
 
         ################################################################################
         # Create a reference to the UMCCRise CodeBuild project
-        cb_project = cb.Project.from_project_name(	
-            self,	
-            id=props['codebuild_project_name'],	
-            project_name=props['codebuild_project_name']	
-        )	
+        cb_project = props['cb_project']
 
 
         ################################################################################
